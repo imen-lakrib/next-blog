@@ -11,7 +11,7 @@ const MyProfile = () => {
   const { data: session } = useSession();
 
   const [myPosts, setMyPosts] = useState([]);
-  const userSession = (session as any)?.user ?? "any value"; // Use type assertion
+  const userSession = session?.user ?? "any value"; // Use type assertion
 
 
   useEffect(() => {
@@ -25,11 +25,11 @@ const MyProfile = () => {
     if (userSession.id) fetchPosts();
   }, [userSession.id]);
 
-  const handleEdit = (post:any) => {
+  const handleEdit = (post) => {
     router.push(`/update-post?id=${post._id}`);
   };
 
-  const handleDelete = async (post:any) => {
+  const handleDelete = async (post) => {
     const hasConfirmed = confirm(
       "Are you sure you want to delete this prompt?"
     );
