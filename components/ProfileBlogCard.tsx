@@ -4,7 +4,25 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
-const ProfileBlogCard = ({ post, handleEdit,handleDelete }) => {
+interface Post {
+  _id: string;
+  image: string;
+  tag: string;
+  title: string;
+  creator: {
+    image: string;
+    email: string;
+    _id: string; // Add the type for creator's _id
+  };
+}
+
+interface ProfileBlogCardProps {
+  post: Post;
+  handleEdit: () => void;
+  handleDelete: () => void;
+}
+
+const ProfileBlogCard = ({ post, handleEdit, handleDelete }: ProfileBlogCardProps) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();

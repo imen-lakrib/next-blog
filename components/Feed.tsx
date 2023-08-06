@@ -1,8 +1,21 @@
 "use client";
 import { useState, useEffect } from "react";
 import BlogCard from "./BlogCard";
+
+interface Post {
+  _id: string;
+  image: string;
+  tag: string;
+  title: string;
+  creator: {
+    image: string;
+    email: string;
+  };
+}
+
+
 const Feed = () => {
-  const [allPosts, setAllPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState<Post[]>([]);
 
   const fetchPosts = async () => {
     try {

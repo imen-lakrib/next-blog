@@ -4,9 +4,14 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { getProviders, signIn, signOut, useSession } from "next-auth/react";
 
+
+interface ProviderData {
+  id: string;
+  name: string;
+}
 const Nav = () => {
   const { data: session } = useSession();
-  const [providers, setProviders] = useState(null);
+  const [providers, setProviders] = useState<Record<string, ProviderData> | null>(null);
   const [toggleDropDown, setToggleDropDown] = useState(false);
 
   useEffect(() => {
@@ -16,6 +21,10 @@ const Nav = () => {
     };
     fetchProviders();
   }, []);
+
+
+  const userImage = session?.user?.image ?? "./assets/images/logo.svg"; // Provide a default image path if session?.user?.image is null or undefined
+
 
   return (
     <div className="text-text flex-between border-black">
@@ -46,7 +55,7 @@ const Nav = () => {
             <Link href="/profile">
               <Image
                 alt="profile"
-                src={session? session?.user.image : "./assets/images/logo.svg"}
+                src={userImage}
                 height={40}
                 width={40}
                 className="rounded-full"
@@ -76,7 +85,7 @@ const Nav = () => {
           <div className="flex ">
             <Image
               alt="profile"
-              src={session? session?.user.image : "./assets/images/logo.svg"}
+              src={userImage}
               height={40}
               width={40}
               className="rounded-full"

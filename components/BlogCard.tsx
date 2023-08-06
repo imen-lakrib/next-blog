@@ -1,7 +1,19 @@
 import Image from "next/image";
 import React from "react";
 
-const BlogCard = ({ data }) => {
+interface BlogCardProps {
+  data: {
+    image: string;
+    tag: string;
+    title: string;
+    creator: {
+      image: string;
+      email: string;
+    };
+  };
+}
+
+const BlogCard = ({ data }: BlogCardProps) => {
   return (
     <div className="p-5  bg-dark-gray border border-text rounded-lg shadow ">
       <a href="#">
@@ -25,15 +37,17 @@ const BlogCard = ({ data }) => {
 
       <div className="flex flex-between  items-center text-text my-2">
         <div className="flex items-center text-text ">
-            <Image
-              height={40}
-              width={40}
-              src={data.creator.image ? data.creator.image : "/assets/images/img.png"}
-              alt="image"
-              className="rounded-full object-contain mr-2"
-            />
+          <Image
+            height={40}
+            width={40}
+            src={
+              data.creator.image ? data.creator.image : "/assets/images/img.png"
+            }
+            alt="image"
+            className="rounded-full object-contain mr-2"
+          />
           <div>
-            <h1>{data.creator.email.split('@')[0]}</h1>
+            <h1>{data.creator.email.split("@")[0]}</h1>
             <h1>{"5 mins read"}</h1>
           </div>
         </div>
