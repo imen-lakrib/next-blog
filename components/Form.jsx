@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+
+
+
+
 const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
   return (
     <section className="w-full max-w-full flex-center flex-col">
@@ -26,8 +30,8 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             Post Description
           </span>
           <textarea
-            value={post.decription}
-            onChange={(e) => setPost({ ...post, decription: e.target.value })}
+            value={post.description}
+            onChange={(e) => setPost({ ...post, description: e.target.value })}
             placeholder='Write your post here'
             required
             className='form_textarea '
