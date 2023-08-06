@@ -11,17 +11,19 @@ const MyProfile = () => {
   const { data: session } = useSession();
 
   const [myPosts, setMyPosts] = useState([]);
+  const userSession = (session as any)?.user ?? "any value"; // Use type assertion
+
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`/api/users/${session?.user.id}/posts`);
+      const response = await fetch(`/api/users/${userSession.id}/posts`);
       const data = await response.json();
 
       setMyPosts(data);
     };
 
-    if (session?.user.id) fetchPosts();
-  }, [session?.user.id]);
+    if (userSession.id) fetchPosts();
+  }, [userSession.id]);
 
   const handleEdit = (post:any) => {
     router.push(`/update-post?id=${post._id}`);
@@ -50,7 +52,7 @@ const MyProfile = () => {
   return (
 
     <Profile
-      name={session?.user.email?.split('@')[0]}
+      name={userSession.email?.split('@')[0]}
       desc='Welcome to your personalized profile page. Share your exceptional prompts and inspire others with the power of your imagination'
       data={myPosts}
       handleEdit={handleEdit}

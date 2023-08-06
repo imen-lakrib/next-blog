@@ -6,15 +6,18 @@ import { useRouter } from "next/navigation";
 import Form from "@components/Form";
 
 const CreatePost = () => {
-    const router = useRouter();
-  const { data: session } = useSession();
+  const router = useRouter();
+  const { data: session, status } = useSession();
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState({
     title: "",
-    decription: "",
+    description: "", // Correct the spelling of 'description'
     tag: "",
     image: "",
   });
+
+  const userSession = (session as any)?.user?.id ?? "any value"; // Use type assertion
+
 
   const createPost = async (e: any) => {
     e.preventDefault();
@@ -25,13 +28,12 @@ const CreatePost = () => {
         method: "POST",
         body: JSON.stringify({
           title: post.title,
-          decription: post.decription,
+          description: post.description, // Correct the spelling of 'description'
           image: post.image,
-          userId: session?.user.id,
+          userId: userSession,
           tag: post.tag,
         }),
       });
-      console.log("test submission",response)
 
       if (response.ok) {
         router.push("/");
@@ -42,6 +44,12 @@ const CreatePost = () => {
       setSubmitting(false);
     }
   };
+
+  if (status === "loading") {
+    // Handle loading state
+    return <div>Loading...</div>;
+  }
+
   return (
     <Form
       type="Create"
