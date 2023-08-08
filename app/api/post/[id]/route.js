@@ -39,7 +39,6 @@ export const POST = async(request, { params }) => {
 
 
 export const DELETE = async (request, { params }) => {
-    const { title, tag, description } = await request.json();
     try {
         await connentToDb()
         await BlogPost.findByIdAndRemove(params.id)

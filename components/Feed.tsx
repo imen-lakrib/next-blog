@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import BlogCard from "./BlogCard";
-import Link from "next/link";
 import { PostProps,FeedProps } from "@types";
 
 

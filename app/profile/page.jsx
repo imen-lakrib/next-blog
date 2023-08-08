@@ -33,6 +33,7 @@ const MyProfile = () => {
   };
 
   const handleDelete = async (post) => {
+    console.log("Deleting post:", post);
     const hasConfirmed = confirm(
       "Are you sure you want to delete this prompt?"
     );
@@ -44,6 +45,7 @@ const MyProfile = () => {
         });
 
         const filteredPosts = myPosts.filter((item) => item._id !== post._id);
+        console.log("Filtered Posts:", filteredPosts);
 
         setMyPosts(filteredPosts);
       } catch (error) {

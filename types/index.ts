@@ -30,6 +30,7 @@ export interface CarProps {
       image: string;
       tag: string;
       title: string;
+      description: string;
       creator: {
         _id: string;
         image: string;
@@ -58,6 +59,7 @@ export interface CarProps {
 
   export interface SocialMediaItem {
     id?: string;
+   
     name?: string;
     link?: string;
     icon: string;

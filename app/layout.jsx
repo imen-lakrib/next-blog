@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
         <Provider >
           <main className="main">
             <Nav/>
-            <div className="m-10">{children}</div>
+            <div className="m-0 md:m-10">{children}</div>
             
             <Footer />
           </main>

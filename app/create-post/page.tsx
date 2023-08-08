@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import Form from "@components/Form";
 
 const CreatePost = () => {
+  const [image, setImage] = useState({ fileKey: "", fileUrl: "" }); // Add this line
+
   const router = useRouter();
   const { data: session, status } = useSession();
   const [submitting, setSubmitting] = useState(false);
@@ -13,7 +15,6 @@ const CreatePost = () => {
     title: "",
     description: "", // Correct the spelling of 'description'
     tag: "",
-    image: "",
   });
 
   const userSession = (session as any)?.user?.id ?? "any value"; // Use type assertion
@@ -29,7 +30,7 @@ const CreatePost = () => {
         body: JSON.stringify({
           title: post.title,
           description: post.description, // Correct the spelling of 'description'
-          image: post.image,
+          image: image.fileUrl, 
           userId: userSession,
           tag: post.tag,
         }),
@@ -57,6 +58,8 @@ const CreatePost = () => {
       setPost={setPost}
       submitting={submitting}
       handleSubmit={createPost}
+      image={image} // Pass the image state to the Form component
+      setImage={setImage} 
     />
   );
 };

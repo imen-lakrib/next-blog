@@ -1,10 +1,14 @@
+'use client'
 import Link from "next/link";
 
+import { UploadButton } from "@uploadthing/react";
+import "@uploadthing/react/styles.css";
 
 
 
 
-const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
+
+const Form = ({ type, post, setPost, submitting, handleSubmit, image, setImage }) => {
   return (
     <section className="w-full max-w-full flex-center flex-col">
       <h1 className="head_text_small "><span className="blue_gradient">{type} Post</span></h1>
@@ -12,7 +16,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
         onSubmit={handleSubmit}
         className='mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism'
       >
-         <label>
+        <label>
           <span className='font-satoshi font-semibold text-base text-white'>
             Post Title
           </span>
@@ -40,8 +44,50 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
 
         <label>
           <span className='font-satoshi font-semibold text-base text-white'>
+            image url
+          </span>
+
+          {/* here upload btn */}
+
+          <UploadButton
+            endpoint="imageUploader"
+            onClientUploadComplete={(res) => {
+              // Do something with the response
+              console.log("Files: ", res);
+              setImage({
+                fileKey: res[0].fileKey,
+                fileUrl: res[0].fileUrl,
+              });
+              alert("Upload Completed", res);
+            }}
+            onUploadError={(error) => {
+              // Do something with the error.
+              console.log("ERROR: ", error);
+
+              alert(`ERROR! ${error.message}`);
+            }}
+          />
+          {console.log("image", image)
+          }         
+           <input
+             value={image.fileUrl}
+            onChange={(e) => setPost({ ...post, image: image.fileUrl })}
+            type='text'
+            placeholder='image url'
+            required
+            disabled={true}
+            className='form_input'
+          />
+
+
+
+
+        </label>
+
+        <label>
+          <span className='font-satoshi font-semibold text-base text-white'>
             Field of Post{" "}
-            
+
           </span>
           <input
             value={post.tag}

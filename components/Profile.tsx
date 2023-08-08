@@ -71,6 +71,7 @@ const Profile = ({
             {socialmed.map((social) => {
               return (
                 <SocialMedia
+               
                   key={social.id}
                   icon={`/assets/images/${social.icon}.png`}
                   link={social.link}

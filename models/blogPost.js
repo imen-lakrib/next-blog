@@ -7,7 +7,7 @@ const BlogPostSchema = new Schema({
       },
       title: {
         type: String,
-        // required: [true, 'Title is required.'],
+        required: [true, 'Title is required.'],
       },
       tag: {
         type: String,
@@ -15,7 +15,7 @@ const BlogPostSchema = new Schema({
       },
       description: {
         type: String,
-        // required: [true, 'Description is required.'],
+        required: [true, 'Description is required.'],
       },
       image: {
         type: String,
