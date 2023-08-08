@@ -1,5 +1,5 @@
 "use client";
-
+// logged in user
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import Profile from "@components/Profile";
 
 const MyProfile = () => {
+  const [loading, setLoading] = useState(true);
+
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -20,6 +22,7 @@ const MyProfile = () => {
       const data = await response.json();
 
       setMyPosts(data);
+      setLoading(false)
     };
 
     if (userSession.id) fetchPosts();
@@ -49,11 +52,16 @@ const MyProfile = () => {
     }
   };
 
+  const userImage = session?.user?.image ?? "./assets/images/logo.svg";
+
+
   return (
 
     <Profile
-      name={userSession.email?.split('@')[0]}
-      desc='Welcome to your personalized profile page. Share your exceptional prompts and inspire others with the power of your imagination'
+    img={userImage}
+    loading={loading}
+      name="Hi!"
+      desc='Welcome to your personalized profile page. Share your ideas and inspire others with the power of your imagination'
       data={myPosts}
       handleEdit={handleEdit}
       handleDelete={handleDelete}

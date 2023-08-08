@@ -3,12 +3,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { getProviders, signIn, signOut, useSession } from "next-auth/react";
+import { ProviderData } from "@types";
 
 
-interface ProviderData {
-  id: string;
-  name: string;
-}
+
 const Nav = () => {
   const { data: session } = useSession();
   const [providers, setProviders] = useState<Record<string, ProviderData> | null>(null);

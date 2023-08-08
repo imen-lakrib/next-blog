@@ -1,34 +1,28 @@
 "use client";
 import { useState, useEffect } from "react";
 import BlogCard from "./BlogCard";
-
-interface Post {
-  _id: string;
-  image: string;
-  tag: string;
-  title: string;
-  creator: {
-    image: string;
-    email: string;
-  };
-}
+import Link from "next/link";
+import { PostProps,FeedProps } from "@types";
 
 
-const Feed = () => {
-  const [allPosts, setAllPosts] = useState<Post[]>([]);
+
+
+const Feed: React.FC<FeedProps> = ({ setIsLoading }) => {
+  const [allPosts, setAllPosts] = useState<PostProps[]>([]);
 
   const fetchPosts = async () => {
     try {
+      setIsLoading(true);
       const response = await fetch("/api/post");
       const data = await response.json();
 
       setAllPosts(data);
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   };
-
-  console.log(allPosts);
 
   useEffect(() => {
     fetchPosts();
@@ -36,12 +30,15 @@ const Feed = () => {
 
   return (
     <section className="md:m-10 m-0 ">
-        <h1 className="section_title">{"Editor's picked"}</h1>
-        <p className="section_sub_title">Featured and highly rated articles</p>
+      <h1 className="section_title">{"Editor's picked"}</h1>
+      <p className="section_sub_title">Featured and highly rated articles</p>
       <div className="grid md:grid-cols-2 md:gap-8 grid-cols-1 gap-4">
         {allPosts ? (
           allPosts.map((post: any, index: number) => {
-            return <BlogCard key={index} data={post} />;
+            return (
+           
+                  <BlogCard key={index} data={post} />
+            );
           })
         ) : (
           <div>there is no blog to display</div>

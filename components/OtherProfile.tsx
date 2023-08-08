@@ -1,9 +1,9 @@
 import Image from "next/image";
 import ProfileBlogCard from "./ProfileBlogCard";
-import { useSession } from "next-auth/react";
 import SocialMedia from "./SocialMedia";
 import { ProfileProps, SocialMediaItem} from '@types'
 import Loader from "./Loader";
+import { useSession } from "next-auth/react";
 
 
 
@@ -35,15 +35,16 @@ const socialmed: SocialMediaItem[] = [
   },
 ];
 
-const Profile = ({
+const OtherProfile = ({
   name,
   data,
-  img,
   handleEdit,
   handleDelete,
   loading
 }: ProfileProps) => {
-  const { data: session } = useSession();
+    const { data: session } = useSession();
+
+  const userImage = data[0].creator.image ? (data[0].creator.image || "./assets/images/logo.svg"): (session?.user?.image ||  "./assets/images/logo.svg") ;
   return (
     <section className="relative">
       {loading && <Loader/>}
@@ -51,7 +52,7 @@ const Profile = ({
         <div className="md:col-span-1">
           <Image
             className="border-sky border-2 p-0 m-0 rounded-full"
-            src={img}
+            src={userImage}
             alt="Image"
             width={200}
             height={200}
@@ -100,4 +101,4 @@ const Profile = ({
   );
 };
 
-export default Profile;
+export default OtherProfile;

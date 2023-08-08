@@ -1,13 +1,11 @@
+import { SocialMediaItem } from "@types";
 import Image from "next/image";
 
 
-interface SocialMediaProps {
-  icon: string;
-  link: string;
-}
 
 
-const SocialMedia = ({ icon, link }: SocialMediaProps) => {
+
+const SocialMedia = ({ icon, link }: SocialMediaItem) => {
   return (
     <div className="bg-text hover:bg-sky m-2 w-10 h-10 rounded-full overflow-hidden flex items-center justify-center">
       <Image
