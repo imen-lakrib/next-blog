@@ -4,6 +4,10 @@ import Link from "next/link";
 import { UploadButton } from "@uploadthing/react";
 import "@uploadthing/react/styles.css";
 
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // Import the styles
+
+
 
 
 
@@ -33,12 +37,27 @@ const Form = ({ type, post, setPost, submitting, handleSubmit, image, setImage }
           <span className='font-satoshi font-semibold text-base text-white'>
             Post Description
           </span>
-          <textarea
+          {/* <textarea
             value={post.description}
             onChange={(e) => setPost({ ...post, description: e.target.value })}
             placeholder='Write your post here'
             required
             className='form_textarea '
+          /> */}
+
+          <ReactQuill
+            value={post.description}
+            onChange={(value) => setPost({ ...post, description: value })}
+            placeholder='Write your post here'
+            modules={{
+              toolbar: [
+                [{ header: '1' }, { header: '2' }],
+                ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                [{ list: 'ordered' }, { list: 'bullet' }],
+                ['link', 'image'],
+                ['clean'],
+              ],
+            }}
           />
         </label>
 
@@ -68,9 +87,9 @@ const Form = ({ type, post, setPost, submitting, handleSubmit, image, setImage }
             }}
           />
           {console.log("image", image)
-          }         
-           <input
-             value={image.fileUrl}
+          }
+          <input
+            value={image.fileUrl}
             onChange={(e) => setPost({ ...post, image: image.fileUrl })}
             type='text'
             placeholder='image url'

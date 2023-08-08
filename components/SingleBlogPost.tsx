@@ -23,9 +23,13 @@ const SingleBlogPost = ({ blogPost }: { blogPost: PostProps }) => {
         <h1 className="section_title  ">
           <span className="blue_gradient">{blogPost.title}</span>
         </h1>
-        
 
-        <Image src={blogPost.image} alt={blogPost.tag} width={1020} height={580} />
+        <Image
+          src={blogPost.image}
+          alt={blogPost.tag}
+          width={1020}
+          height={580}
+        />
 
         <Link href={`/profile/${blogPost.creator._id}`}>
           <div className="flex items-center text-text my-10">
@@ -48,7 +52,10 @@ const SingleBlogPost = ({ blogPost }: { blogPost: PostProps }) => {
         </Link>
 
         <div className="text-left my-10">
-          <p className="font-bold text-text text-xl ">{blogPost.description}</p>
+          <div
+            className="font-bold text-text "
+            dangerouslySetInnerHTML={{ __html: blogPost.description }}
+          />{" "}
         </div>
       </div>
     </section>
