@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 import Loader from "@components/Loader";
 import { PostProps } from "@types";
 import SingleBlogPost from "@components/SingleBlogPost";
