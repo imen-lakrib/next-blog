@@ -5,10 +5,11 @@ import Link from "next/link";
 import { UploadButton } from "@uploadthing/react";
 import "@uploadthing/react/styles.css";
 
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css'; // Import the styles
+import dynamic from 'next/dynamic';
 
-
+// Dynamically import ReactQuill and its CSS on the client side
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+const QuillStyles = dynamic(() => import('react-quill/dist/quill.snow.css'), { ssr: false });
 
 
 
