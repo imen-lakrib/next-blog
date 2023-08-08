@@ -1,10 +1,6 @@
 import { MouseEventHandler } from "react";
 
 
-export interface Image {
-    fileKey: string;
-    fileUrl: string;
-  }
 
   export interface BlogCardProps {
     data: {
@@ -67,4 +63,3 @@ export interface Image {
   export interface FeedProps {
     setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   }
-  
